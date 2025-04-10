@@ -1,48 +1,65 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-  <title>Login | Tailwind Admin</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./dist/styles.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-    crossorigin="anonymous">
-  <style>
-  .login{
-    background: url('Assets/dist/images/login-new.jpeg')
-  }
-  </style>  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Aplikasi</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+    .login-bg {
+        background-image: url('Assets/dist/images/login-new.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
+    </style>
 </head>
 
-<body class="h-screen font-sans login bg-cover">
-<div class="container mx-auto h-full flex flex-1 justify-center items-center">
-  <div class="w-full max-w-lg">
-    <div class="leading-loose">
-      <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-        <p class="text-gray-800 font-medium text-center text-lg font-bold">Login</p>
-        <div class="">
-          <label class="block text-sm text-gray-00" for="username">Username</label>
-          <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="username" name="username" type="text" required="" placeholder="User Name" aria-label="username">
-        </div>
-        <div class="mt-2">
-          <label class="block text-sm text-gray-600" for="password">Password</label>
-          <input class="w-full px-5  py-1 text-gray-700 bg-gray-200 rounded" id="password" name="password" type="text" required="" placeholder="*******" aria-label="password">
-        </div>
-        <div class="mt-4 items-center justify-between">
-          <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Login</button>
-          <a class="inline-block right-0 align-baseline  font-bold text-sm text-500 hover:text-blue-800" href="#">
-            Forgot Password?
-          </a>
-        </div>
-        <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="#">
-          Not registered ?
-        </a>
-      </form>
+<body class="min-h-screen login-bg flex items-center justify-center">
+    <div class="bg-white rounded-3 shadow-lg p-5 w-full max-w-md">
+        <h2 class="text-center text-2xl font-bold text-gray-800 mb-4">Masuk</h2>
 
+        <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('error') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+        <form action="<?= base_url('loginAction') ?>" method="POST" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label text-sm text-gray-700">Nama Pengguna</label>
+                <input type="text" class="form-control" id="username" name="username"
+                    placeholder="Masukkan nama pengguna" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label text-sm text-gray-700">Kata Sandi</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Masukkan kata sandi" required>
+            </div>
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-dark">Masuk</button>
+            </div>
+            <div class="text-center text-sm">
+                <a href="#" class="text-decoration-none text-blue-600 hover:underline">Lupa kata sandi?</a>
+            </div>
+            <div class="text-center mt-2 text-sm">
+                <span>Belum punya akun?</span>
+                <a href="<?= base_url('register') ?>" class="text-blue-600 hover:underline">Daftar sekarang</a>
+            </div>
+        </form>
     </div>
-  </div>
-</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
