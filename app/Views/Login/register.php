@@ -1,59 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./dist/styles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-          crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Aplikasi</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <style>
-        .login{
-            background: url('./dist/images/login-new.jpeg')
-        }
+    .register-bg {
+        background-image: url('Assets/dist/images/login-new.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
     </style>
-    <title>Register</title>
 </head>
-<body class="h-screen font-sans login bg-cover">
-<div class="container mx-auto h-full flex flex-1 justify-center items-center">
-    <div class="w-full max-w-lg">
-        <div class="leading-loose">
-            <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-                <p class="text-gray-800 font-medium">Register</p>
-                <div class="">
-                    <label class="block text-sm text-gray-00" for="cus_name">Name</label>
-                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="cus_name" name="cus_name" type="text" required="" placeholder="Your Name" aria-label="Name">
-                </div>
-                <div class="mt-2">
-                    <label class="block text-sm text-gray-600" for="cus_email">Email</label>
-                    <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Your Email" aria-label="Email">
-                </div>
-                <div class="mt-2">
-                    <label class=" block text-sm text-gray-600" for="cus_email">Address</label>
-                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Street" aria-label="Email">
-                </div>
-                <div class="mt-2">
-                    <label class="hidden text-sm block text-gray-600" for="cus_email">City</label>
-                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="City" aria-label="Email">
-                </div>
-                <div class="inline-block mt-2 w-1/2 pr-1">
-                    <label class="hidden block text-sm text-gray-600" for="cus_email">Country</label>
-                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Country" aria-label="Email">
-                </div>
-                <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
-                    <label class="hidden block text-sm text-gray-600" for="cus_email">Zip</label>
-                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="cus_email"  name="cus_email" type="text" required="" placeholder="Zip" aria-label="Email">
-                </div>
 
-                <div class="mt-4">
-                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Register</button>
-                </div>
-                <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="login.html">
-                    Already have an account ?
-                </a>
-            </form>
+<body class="min-vh-100 register-bg d-flex align-items-center justify-content-center px-4">
+    <div class="bg-white rounded-4 shadow-lg p-5 w-100" style="max-width: 500px;">
+        <div class="text-center mb-4">
+            <i class="fas fa-user-plus fa-3x text-dark mb-2"></i>
+            <h2 class="text-2xl fw-bold text-dark">Daftar Akun</h2>
         </div>
-    </div>
-</div>
 
+        <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('error') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+
+        <form action="<?= base_url('registerAction') ?>" method="POST" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label text-sm text-muted">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label text-sm text-muted">Kata Sandi</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Masukkan kata sandi" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label text-sm text-muted">Konfirmasi Kata Sandi</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                    placeholder="Ulangi kata sandi" required>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-dark w-100">Daftar</button>
+            </div>
+
+            <div class="text-center text-sm">
+                <span>Sudah punya akun?</span>
+                <a href="<?= base_url('/') ?>" class="text-blue-600 hover:underline">Masuk sekarang</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
